@@ -1,0 +1,18 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "react is best",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
