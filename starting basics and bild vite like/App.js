@@ -1400,7 +1400,7 @@ const RestaurantCard = (props) => {
       ></img>
       <h3>{name}</h3>
       <h4>{cuisines.splice(0, 3).join(", ")}</h4>
-      <h4>{avgRating} star</h4>
+      <h4>{avgRating} stars</h4>
       <h4>{deliveryTime} minutes</h4>
     </div>
   );
