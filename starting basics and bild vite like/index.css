@@ -52,3 +52,20 @@
     cursor: pointer;
     border: none;
 }
+
+.filter{
+    margin: 15px;
+    /* font-size: xx-large; */
+}
+.filter-btn{
+    cursor: pointer;
+    font-size: x-large;
+    background-color: rgb(255, 153, 0);
+    border-radius: 20%;
+    /* border-radius: 20px; */
+    border-style:ridge ;
+}
+
+.filter-btn:hover{
+    box-shadow: 10px 10px 20px blue;
+}
