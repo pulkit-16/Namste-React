@@ -59,13 +59,47 @@
 }
 .filter-btn{
     cursor: pointer;
-    font-size: x-large;
+    margin-top: 8px;
+    font-size: large;
     background-color: rgb(255, 153, 0);
-    border-radius: 20%;
+    border-radius: 20px;
     /* border-radius: 20px; */
     border-style:ridge ;
 }
 
 .filter-btn:hover{
     box-shadow: 10px 10px 20px blue;
+}
+
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    width: 200px;
+    height: 280px;
+    margin: 5px;
+    margin-top: 70px;
+    padding: 5px;
+    background-color: rgb(218, 208, 208);
+}
+.input{
+    font-size: large;
+}
+.search-btn{
+    margin:10px;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;    
+}
+.login{
+    font-size: large;
+    background-color: darkgray;
+    border-radius: 40%;
+    cursor: pointer;
+}
+.search-container{
+    display: flex;
+     align-items:first baseline;
 }
