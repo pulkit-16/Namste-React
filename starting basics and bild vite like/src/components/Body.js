@@ -11,7 +11,8 @@ const Body = () => {
   const filterTopRes = () => {
     if (isFiltered) {
       setFilteredResList(resList);
-    } else {
+    } 
+    else {
       const topRes = resList?.filter(
         (res) => res.card.card.info.avgRating >= 4.0
       );
@@ -37,20 +38,12 @@ const Body = () => {
     setFilteredResList(result);
   };
 
-  // normal consol.log(isFiltered) not working coz of async
-
-  useEffect(() => {
-    console.log("isFiltered updated:", isFiltered);
-  }, [isFiltered]);
-
-
-
+ 
   const handleSearch = (e) => {
     let data = text.toLowerCase();
 
     console.log(data)
-   // setText(data);
-
+   
     const resaturantFilterSearch = resList.filter((res) =>
       res.card.card.info.name.toLowerCase().includes(data)
     );
@@ -96,6 +89,20 @@ const Body = () => {
   );
 };
 export default Body;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

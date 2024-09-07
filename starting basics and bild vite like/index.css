@@ -21,17 +21,20 @@
     display: flex;
     flex-wrap: wrap;
     margin: 10px;
+    
 }
 .res-card{
     /* margin: 0;
     padding: 0; */
+      /* flex-direction: column; */
+      /* height: 300px; */
     display: flexbox;
-    border: 1px solid;
-    width: 200px;
-    /* height: 300px; */
+    width: 220px; 
     margin: 5px;
     padding: 3px;
     background-color: rgb(195, 238, 238);
+    border: 2px solid rgba(104, 11, 11, 0.637);
+    border-radius: 10px;
 }
 .card-img{
     width: 100%;
@@ -42,8 +45,11 @@
     margin:3px;
 }
 .res-card>h3{
+    
     padding: 3px;
     margin: 3px;;
+    
+ 
 }
 .search{
     margin: 15px;
@@ -59,12 +65,13 @@
 }
 .filter-btn{
     cursor: pointer;
+    padding: 5px;
     margin-top: 8px;
-    font-size: large;
-    background-color: rgb(255, 153, 0);
-    border-radius: 20px;
+    font-size:medium;
+    background-color:aliceblue;
+    border-radius: 10px;
     /* border-radius: 20px; */
-    border-style:ridge ;
+   
 }
 
 .filter-btn:hover{
@@ -82,12 +89,14 @@
     margin: 5px;
     margin-top: 70px;
     padding: 5px;
-    background-color: rgb(218, 208, 208);
+    background-color:aliceblue;
+    border-radius: 10px;    
 }
 .input{
     font-size: large;
 }
 .search-btn{
+    background-color: aliceblue;
     margin:10px;
     padding: 5px;
     border-radius: 10px;
