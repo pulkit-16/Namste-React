@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { useParams } from "react-router-dom";
+import { MENU_API } from "../utils/constants";
 
 const RestaurantMenu = () => {
   const [resMenu, setResMenu] = useState(null);
   const [foodList, setFoodList] = useState(null);
   const [allItems, setAllItems] = useState([]);
+
+  const { resId } = useParams();
+  // console.log(resId)
 
   useEffect(() => {
     fetchMenu();
@@ -12,9 +17,7 @@ const RestaurantMenu = () => {
 
   const fetchMenu = async () => {
     try {
-      let response = await fetch(
-        "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.869408&lng=77.595139&restaurantId=328929&catalog_qa=undefined&query=Pizza&submitAction=ENTER"
-      );
+      let response = await fetch(MENU_API + resId);
       const json = await response.json();
       setResMenu(json.data);
     } catch (error) {
@@ -32,17 +35,14 @@ const RestaurantMenu = () => {
     }
   }, [resMenu]);
 
+  console.log(resMenu);
+
   const handleVegBtn = () => {
     const newFilterFoodList = allItems.filter(
       (item) => item.card.info.itemAttribute.vegClassifier === "VEG"
     );
 
-    const uniqueFoodList = newFilterFoodList.filter(
-      (item, index, self) =>
-        index === self.findIndex((t) => t.card.info.id === item.card.info.id)
-    );
-
-    setFoodList(uniqueFoodList);
+    setFoodList(newFilterFoodList);
   };
 
   const handleNonVegBtn = () => {
@@ -50,22 +50,15 @@ const RestaurantMenu = () => {
       (item) => item.card.info.itemAttribute.vegClassifier === "NONVEG"
     );
 
-    const uniqueFoodList = newFilterFoodList.filter(
-      (item, index, self) =>
-        index === self.findIndex((t) => t.card.info.id === item.card.info.id)
-    );
-
-    setFoodList(uniqueFoodList);
+    setFoodList(newFilterFoodList);
   };
-
-  
 
   if (resMenu == null) return <Shimmer />;
 
   const { name, cuisines, avgRating, sla } = resMenu.cards[2].card?.card?.info;
   const { cards } = resMenu.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
-  console.log(cards)
 
+  //console.log(allItems);
 
 
 
@@ -92,11 +85,10 @@ const RestaurantMenu = () => {
       </span>
       <ul>
         {
-          cards.map((c, index) => {
+        cards.map((c, index) => {
           // Check if card contains itemCards
-          if (c.card?.card?.itemCards) { 
+          if (c.card?.card?.itemCards) {
             // Filter items based on the current foodList
-            
 
             const filteredItems =
               foodList === null
@@ -104,7 +96,12 @@ const RestaurantMenu = () => {
                 : c.card.card.itemCards.filter((item) =>
                     foodList.some((f) => f.card.info.id === item.card.info.id)
                   );
-            if(filteredItems.length>0){
+
+
+         // console.log(filteredItems);
+
+
+            if (filteredItems.length > 0) {
               return (
                 <div key={index}>
                   <h2>{c.card.card.title || "Untitled Category"}</h2>
@@ -115,8 +112,7 @@ const RestaurantMenu = () => {
                   </ul>
                 </div>
               );
-            }       
-            
+            }
           }
           return null; // Return null for cards that don't have itemCards
         })}
@@ -126,3 +122,9 @@ const RestaurantMenu = () => {
 };
 
 export default RestaurantMenu;
+
+//for unique food list
+// const uniqueFoodList = newFilterFoodList.filter(
+//   (item, index, self) =>
+//     index === self.findIndex((t) => t.card.info.id === item.card.info.id)
+// );

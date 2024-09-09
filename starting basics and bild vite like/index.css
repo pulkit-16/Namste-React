@@ -1,3 +1,6 @@
+
+
+
 .logo-img{
     width: 120px;
 }
@@ -30,6 +33,7 @@
       /* height: 300px; */
     display: flexbox;
     width: 220px; 
+    height: 320px;
     margin: 5px;
     padding: 3px;
     background-color: rgb(195, 238, 238);
