@@ -1,29 +1,18 @@
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+import useFilteredFood from "../utils/useFilteredFood";
 
 const RestaurantMenu = () => {
-  const [resMenu, setResMenu] = useState(null);
-  const [foodList, setFoodList] = useState(null);
   const [allItems, setAllItems] = useState([]);
 
   const { resId } = useParams();
-  // console.log(resId)
+  const resMenu = useRestaurantMenu(resId); // custom hooks
+  const { foodList, filterVegItems, filterNonVegItems, showAllItems } =
+    useFilteredFood(allItems);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    try {
-      let response = await fetch(MENU_API + resId);
-      const json = await response.json();
-      setResMenu(json.data);
-    } catch (error) {
-      console.error("Error fetching menu data:", error);
-    }
-  };
+  console.log("before useeffect");
 
   useEffect(() => {
     if (resMenu) {
@@ -32,38 +21,24 @@ const RestaurantMenu = () => {
           (c) => c.card?.card?.itemCards || []
         );
       setAllItems(items || []);
+
+      console.log("useEffect2")
     }
   }, [resMenu]);
 
-  console.log(resMenu);
 
-  const handleVegBtn = () => {
-    const newFilterFoodList = allItems.filter(
-      (item) => item.card.info.itemAttribute.vegClassifier === "VEG"
-    );
-
-    setFoodList(newFilterFoodList);
-  };
-
-  const handleNonVegBtn = () => {
-    const newFilterFoodList = allItems.filter(
-      (item) => item.card.info.itemAttribute.vegClassifier === "NONVEG"
-    );
-
-    setFoodList(newFilterFoodList);
-  };
 
   if (resMenu == null) return <Shimmer />;
 
   const { name, cuisines, avgRating, sla } = resMenu.cards[2].card?.card?.info;
   const { cards } = resMenu.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
 
-  //console.log(allItems);
-
-
+  
 
   return (
+    
     <div className="menu">
+      {console.log("start of html")}
       My Menu
       <h1>{name}</h1>
       <h3>
@@ -73,19 +48,12 @@ const RestaurantMenu = () => {
       <h4>{sla.deliveryTime} minutes</h4>
       <h3>Menu</h3>
       <span>
-        <button onClick={handleVegBtn}>Veg</button>
-        <button onClick={handleNonVegBtn}>Non-Veg</button>
-        <button
-          onClick={() => {
-            setFoodList(null);
-          }}
-        >
-          All Food
-        </button>
+        <button onClick={filterVegItems}>Veg</button>
+        <button onClick={filterNonVegItems}>Non-Veg</button>
+        <button onClick={showAllItems}> All Food </button>
       </span>
       <ul>
-        {
-        cards.map((c, index) => {
+        {cards.map((c, index) => {
           // Check if card contains itemCards
           if (c.card?.card?.itemCards) {
             // Filter items based on the current foodList
@@ -97,9 +65,7 @@ const RestaurantMenu = () => {
                     foodList.some((f) => f.card.info.id === item.card.info.id)
                   );
 
-
-         // console.log(filteredItems);
-
+            // console.log(filteredItems);
 
             if (filteredItems.length > 0) {
               return (
@@ -108,7 +74,10 @@ const RestaurantMenu = () => {
                   <ul>
                     {filteredItems.map((item) => (
                       <li key={item.card.info.id}>{item.card.info.name}</li>
-                    ))}
+                    ))
+                    
+                    }
+                    {console.log("displayed ")}
                   </ul>
                 </div>
               );
