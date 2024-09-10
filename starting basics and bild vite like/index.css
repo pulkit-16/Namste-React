@@ -117,3 +117,16 @@
     display: flex;
      align-items:first baseline;
 }
+
+
+.user-card{
+    padding: 10px;
+    margin : 5px;
+    border: 2px,solid;
+}
+.count-btn{
+    
+   
+    padding: 5px;
+    border-radius: 10px;
+}
