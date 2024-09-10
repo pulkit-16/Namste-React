@@ -3,29 +3,20 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import useFilteredFood from "../utils/useFilteredFood";
+import useAllFoodItems from "../utils/useAllFoodItems";
 
 const RestaurantMenu = () => {
-  const [allItems, setAllItems] = useState([]);
+ 
 
   const { resId } = useParams();
   const resMenu = useRestaurantMenu(resId); // custom hooks
+
+  const allItems= useAllFoodItems(resMenu);
   const { foodList, filterVegItems, filterNonVegItems, showAllItems } =
     useFilteredFood(allItems);
 
-  console.log("before useeffect");
-
-  useEffect(() => {
-    if (resMenu) {
-      const items =
-        resMenu.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.flatMap(
-          (c) => c.card?.card?.itemCards || []
-        );
-      setAllItems(items || []);
-
-      console.log("useEffect2")
-    }
-  }, [resMenu]);
-
+    
+  console.log("render compo");
 
 
   if (resMenu == null) return <Shimmer />;
@@ -33,7 +24,6 @@ const RestaurantMenu = () => {
   const { name, cuisines, avgRating, sla } = resMenu.cards[2].card?.card?.info;
   const { cards } = resMenu.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
 
-  
 
   return (
     
