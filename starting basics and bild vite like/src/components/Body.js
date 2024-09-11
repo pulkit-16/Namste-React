@@ -2,12 +2,15 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useInternetStatus from "../utils/useInternetStatus";
 
 const Body = () => {
   const [filteredResList, setFilteredResList] = useState([]);
   const [resList, setResList] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [text, setText] = useState("");
+
+  const onlineStatus = useInternetStatus();
 
   const filterTopRes = () => {
     if (isFiltered) {
@@ -49,6 +52,14 @@ const Body = () => {
     setFilteredResList(resaturantFilterSearch);
     console.log(resaturantFilterSearch);
   };
+
+  if(onlineStatus==false){
+    return(
+      <h1>Looks like you are Offline ! Check your internet</h1>
+    )
+  }
+    
+  
 
   return resList.length === 0 ? (
     <Shimmer />

@@ -6,27 +6,21 @@ import useFilteredFood from "../utils/useFilteredFood";
 import useAllFoodItems from "../utils/useAllFoodItems";
 
 const RestaurantMenu = () => {
- 
-
   const { resId } = useParams();
   const resMenu = useRestaurantMenu(resId); // custom hooks
 
-  const allItems= useAllFoodItems(resMenu);
+  const allItems = useAllFoodItems(resMenu);
   const { foodList, filterVegItems, filterNonVegItems, showAllItems } =
     useFilteredFood(allItems);
 
-    
   console.log("render compo");
-
 
   if (resMenu == null) return <Shimmer />;
 
   const { name, cuisines, avgRating, sla } = resMenu.cards[2].card?.card?.info;
   const { cards } = resMenu.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
 
-
   return (
-    
     <div className="menu">
       {console.log("start of html")}
       My Menu
@@ -64,9 +58,7 @@ const RestaurantMenu = () => {
                   <ul>
                     {filteredItems.map((item) => (
                       <li key={item.card.info.id}>{item.card.info.name}</li>
-                    ))
-                    
-                    }
+                    ))}
                     {console.log("displayed ")}
                   </ul>
                 </div>
