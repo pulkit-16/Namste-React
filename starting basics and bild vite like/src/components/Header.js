@@ -6,45 +6,51 @@ import useInternetStatus from "../utils/useInternetStatus";
 const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
   const onlineStatus = useInternetStatus();
+
   return (
-    <div className="nav-bar">
-      <div className="logo">
-        <img className="logo-img " alt="logo-img" src={LOGO_URL}></img>
+    <header className="bg-white shadow-md  ">
+      <div className="container mx-auto flex justify-between items-center p-2">
+        {/* Logo Section */}
+        <div className="w-28">
+          <img className="h-15" alt="logo-img" src={LOGO_URL} />
+        </div>
+
+        {/* Navigation Menu */}
+        <nav className="flex items-center space-x-4">
+          <span className="text-sm">
+            Online Status: {onlineStatus ? "✅" : "🔴"}
+          </span>
+          <ul className="flex space-x-4">
+            <li>
+              <Link className="text-gray-700 hover:text-blue-500" to="/">Home</Link>
+            </li>
+            <li>
+              <Link className="text-gray-700 hover:text-blue-500" to="/about">About</Link>
+            </li>
+            <li>
+              <Link className="text-gray-700 hover:text-blue-500" to="/contact">Contact Us</Link>
+            </li>
+            <li>
+              <Link className="text-gray-700 hover:text-blue-500" to="/grocery">Grocery</Link>
+            </li>
+            <li>
+              <Link className="text-gray-700 hover:text-blue-500" to="/cart">Cart</Link>
+            </li>
+            <li>
+              <button
+                className="text-gray-700 hover:text-blue-500 "
+                onClick={() => setIsLogin(!isLogin)}
+              >
+                {isLogin ? "Logout" : "Login"}
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <div className="navItems">
-        <ul>
-          <li>Online Status {onlineStatus ? "✅":"🔴"}</li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-
-          <li>
-            <Link to="/contact">Contact Us</Link>
-          </li>
-
-          
-          <li>  <Link to="/grocery">Grocery</Link></li>
-
-          <li>Cart</li>
-          
-          <li>
-            <button
-              className="login"
-              onClick={() => {
-                setIsLogin(!isLogin);
-                //console.log(isLogin);
-              }}
-            >
-              {isLogin ? "Logout" : "Login"}
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </header>
   );
 };
+
 export default Header;
+
+
