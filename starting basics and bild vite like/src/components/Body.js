@@ -66,24 +66,25 @@ const Body = () => {
   ) : (
     <div className="p-4">
       {/* Search and Filter Container */}
-      <div className="mb-4 flex flex-col md:flex-row justify-between items-center">
-        <div className="flex flex-1 space-x-3">
+      <div className="mb-4 flex justify-between items-center mx-20 ">
+      <div className="mt-2 ">
+          <button className="bg-gray-50 text-slate-800 border border-solid border-black  px-5 rounded-full hover:bg-green-400 transition duration-200" onClick={filterTopRes}>
+            {isFiltered ? "Show All Restaurants" : "Top Rated "}
+          </button>
+        </div>
+        <div className="space-x-4  ">
           <input
-            className="border border-gray-300 p-2 rounded-md w-full md:w-1/2 lg:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="  border border-gray-300 p-1 rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={text}
             type="text"
             placeholder="Search Restaurant Name"
             onChange={(e) => setText(e.target.value)}
           />
-          <button className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-200" onClick={handleSearch}>
+          <button className="bg-green-500 text-white p-1 px-4 rounded-md hover:bg-green-700 transition duration-200" onClick={handleSearch}>
             Search
           </button>
         </div>
-        <div className="mt-2 md:mt-0">
-          <button className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition duration-200" onClick={filterTopRes}>
-            {isFiltered ? "Show All Restaurants" : "Show Top Rated Restaurants"}
-          </button>
-        </div>
+     
       </div>
 
       {/* Cards Container */}

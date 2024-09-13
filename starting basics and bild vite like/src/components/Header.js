@@ -9,36 +9,36 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md  ">
-      <div className="container mx-auto flex justify-between items-center p-2">
+      <div className="container mx-auto flex justify-between items-center px-5 mb-4">
         {/* Logo Section */}
-        <div className="w-28">
+        <div className="w-24 ">
           <img className="h-15" alt="logo-img" src={LOGO_URL} />
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex items-center space-x-4">
+        <nav className="flex items-center space-x-10 ">
           <span className="text-sm">
             Online Status: {onlineStatus ? "✅" : "🔴"}
           </span>
-          <ul className="flex space-x-4">
+          <ul className="flex text-l font-semibold space-x-10">
             <li>
-              <Link className="text-gray-700 hover:text-blue-500" to="/">Home</Link>
+              <Link className="text-gray-700 hover:text-yellow-500" to="/">Home</Link>
             </li>
             <li>
-              <Link className="text-gray-700 hover:text-blue-500" to="/about">About</Link>
+              <Link className="text-gray-700 hover:text-yellow-500" to="/about">About</Link>
             </li>
             <li>
-              <Link className="text-gray-700 hover:text-blue-500" to="/contact">Contact Us</Link>
+              <Link className="text-gray-700 hover:text-yellow-500" to="/contact">Contact Us</Link>
             </li>
             <li>
-              <Link className="text-gray-700 hover:text-blue-500" to="/grocery">Grocery</Link>
+              <Link className="text-gray-700 hover:text-yellow-500" to="/grocery">Grocery</Link>
             </li>
             <li>
-              <Link className="text-gray-700 hover:text-blue-500" to="/cart">Cart</Link>
+              <Link className="text-gray-700 hover:text-yellow-500" to="/cart">Cart</Link>
             </li>
             <li>
               <button
-                className="text-gray-700 hover:text-blue-500 "
+                className="text-gray-700 hover:text-yellow-500 "
                 onClick={() => setIsLogin(!isLogin)}
               >
                 {isLogin ? "Logout" : "Login"}

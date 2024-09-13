@@ -1,7 +1,5 @@
 export const LOGO_URL =
-"https://mir-s3-cdn-cf.behance.net/projects/404/cfaa9d174980195.Y3JvcCwxOTk5LDE1NjQsMCwyMTc.jpg"
-
-
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkcbmQd4eEP93hC_ZvJL-qMmzCcgy5GELygA&s"
  export const CDN_URL =
 "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
 
