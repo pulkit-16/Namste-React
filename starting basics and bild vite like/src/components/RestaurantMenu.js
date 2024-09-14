@@ -36,11 +36,11 @@ const RestaurantMenu = () => {
       {/* {console.log("start of html")} */}
       <div className=" flex flex-col place-items-start border pl-5 shadow-md ml-36 w-2/5 mr-60">
         <h1 className="text-3xl font-bold mb-4">{name}</h1>
-        <h3 className="text-xl font-semibold text-gray-700 mb-2">
+        <h3 className="text-xl font-semibold text-gray-700 mb-2  dark:text-white">
           <p>{cuisines.join(",")}</p>
         </h3>
-        <h3 className="text-lg text-yellow-500 mb-1">{avgRating} star</h3>
-        <h4 className="text-gray-600 mb-4 font-semibold">{sla.deliveryTime} minutes</h4>
+        <h3 className="text-lg text-yellow-500 mb-1  dark:text-white">{avgRating} star</h3>
+        <h4 className="text-gray-600 mb-4 font-semibold  dark:text-white ">{sla.deliveryTime} minutes</h4>
         <h3 className="text-2xl font-semibold mb-4">Menu</h3>
 
        
@@ -86,7 +86,7 @@ const RestaurantMenu = () => {
               return (
                 <div
                   key={index}
-                  className="p-8 border mx-28 border-gray-200 rounded-lg shadow-md mb-4"
+                  className="p-8 border mx-28 border-gray-200 rounded-lg shadow-md mb-4 hover:bg-gray-200 dark:hover:bg-slate-800"
                 >
                   <h2 className="text-2xl font-semibold mb-4 mt-2 cursor-pointer flex justify-between items-center">
                     {c.card.card.title || "Untitled Category"}
@@ -127,8 +127,8 @@ const RestaurantMenu = () => {
                             <span className="text-yellow-500 mt-2 flex items-center">
                               {" "}
                               {item.card.info.ratings.aggregatedRating.rating}
-                              <VscStarFull className="m-1" />
-                              <span className="text-slate-600 ">
+                              <VscStarFull className="m-1  " />
+                              <span className="text-slate-600 dark:text-white">
                                 (
                                 {
                                   item.card.info.ratings.aggregatedRating

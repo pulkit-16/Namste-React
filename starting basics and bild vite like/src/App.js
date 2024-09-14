@@ -13,11 +13,17 @@ import RestaurantMenu from "./components/RestaurantMenu";
 const Grocery = lazy(()=>import("./components/Grocery"))  // seperate bundles
 
 const AppLayout = () => {
+  const [dark, setDark] = React.useState(false);
+
+  const darkModeHandler = () => {
+    setDark(!dark);
+    document.body.classList.toggle("dark");
+  };
   return (
-    <div>
-      <Header/>
-      <Outlet/>
-    </div>
+    <div className={`min-h-screen ${dark ? 'bg-gray-900 text-white ' : 'bg-white-100'}`}>
+    <Header dark ={dark} darkModeHandler ={darkModeHandler} />
+    <Outlet />
+  </div>
   );
 };
 
