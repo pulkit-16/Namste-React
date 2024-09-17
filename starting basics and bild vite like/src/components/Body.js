@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { PromotedRestaurantCard } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -9,6 +9,8 @@ const Body = () => {
   const [resList, setResList] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [text, setText] = useState("");
+
+  const RestaurantPromoted =PromotedRestaurantCard(RestaurantCard);
 
   const onlineStatus = useInternetStatus();
 
@@ -30,7 +32,7 @@ const Body = () => {
 
   const fetchData = async () => {
     const data1 = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.869408&lng=77.595139&collection=83644&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.618929&lng=77.051099&collection=83644&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
     );
 
     const json = await data1.json();
@@ -53,22 +55,22 @@ const Body = () => {
     console.log(resaturantFilterSearch);
   };
 
-  if(onlineStatus==false){
-    return(
-      <h1>Looks like you are Offline ! Check your internet</h1>
-    )
+  if (onlineStatus == false) {
+    return <h1>Looks like you are Offline ! Check your internet</h1>;
   }
-    
-  
 
+  console.log(resList);
   return resList.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="p-4">
       {/* Search and Filter Container */}
       <div className="mb-4 flex justify-between items-center mx-20 ">
-      <div className="mt-2 ">
-          <button className="bg-gray-50 text-slate-800 border border-solid border-black  px-5 rounded-full hover:bg-green-400 transition duration-200" onClick={filterTopRes}>
+        <div className="mt-2 ">
+          <button
+            className="bg-gray-50 text-slate-800 border border-solid border-black  px-5 rounded-full hover:bg-green-400 transition duration-200"
+            onClick={filterTopRes}
+          >
             {isFiltered ? "Show All Restaurants" : "Top Rated "}
           </button>
         </div>
@@ -80,11 +82,13 @@ const Body = () => {
             placeholder="Search Restaurant Name"
             onChange={(e) => setText(e.target.value)}
           />
-          <button className="bg-green-500 text-white p-1 px-4 rounded-md hover:bg-green-700 transition duration-200" onClick={handleSearch}>
+          <button
+            className="bg-green-500 text-white p-1 px-4 rounded-md hover:bg-green-700 transition duration-200"
+            onClick={handleSearch}
+          >
             Search
           </button>
         </div>
-     
       </div>
 
       {/* Cards Container */}
@@ -94,7 +98,11 @@ const Body = () => {
             key={restaurant.card.card.info.id}
             to={"/restaurant/" + restaurant.card.card.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.card.card.info.promoted ? (
+              <RestaurantPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

@@ -9,11 +9,11 @@ const Header = ({ dark, darkModeHandler }) => {
   const onlineStatus = useInternetStatus();
 
   return (
-    <header className="bg-white  dark:bg-gray-900  dark:text-white shadow-md  ">
+    <header className="bg-slate-50  dark:bg-gray-900  dark:text-white shadow-md  ">
       <div>
         <div className="container mx-auto flex justify-between items-center px-5 mb-4">
           {/* Logo Section */}
-          <div className="w-24 ">
+          <div className="w-24 rounded-lg shadow-lg p-2 bg-yellow-300 ">
             <img className="h-15" alt="logo-img" src={LOGO_URL} />
           </div>
 
