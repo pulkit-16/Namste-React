@@ -4,15 +4,13 @@ import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import useFilteredFood from "../utils/useFilteredFood";
 import useAllFoodItems from "../utils/useAllFoodItems";
-import { CDN_URL } from "../utils/constants";
-import { VscStarFull } from "react-icons/vsc";
-import { BsChevronCompactDown } from "react-icons/bs";
-import CardsList from "./CardsList";
+
+import MenuCardList from "./RestaurantCategory";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
-
   const { resId } = useParams();
-  const resMenu = useRestaurantMenu(resId);       // custom hooks
+  const resMenu = useRestaurantMenu(resId); // custom hooks
   const allItems = useAllFoodItems(resMenu);
   const { foodList, filterVegItems, filterNonVegItems, showAllItems } =
     useFilteredFood(allItems);
@@ -24,10 +22,19 @@ const RestaurantMenu = () => {
   const { name, cuisines, avgRating, sla } = resMenu.cards[2].card?.card?.info;
   const { cards } = resMenu.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
 
+  const itemCategories =
+    resMenu.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ==
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
+  console.log("my categories are ", itemCategories);
+
   // const { deliveryTime } = resData?.card?.card?.info?.sla;
 
-console.log("this is resmenu",resMenu)
-console.log("this.is cards",cards)
+  console.log("this is resmenu", resMenu);
+  console.log("this.is cards", cards);
 
   return (
     <div className="container m-6 ">
@@ -37,11 +44,13 @@ console.log("this.is cards",cards)
         <h3 className="text-xl font-semibold text-gray-700 mb-2  dark:text-white">
           <p>{cuisines.join(",")}</p>
         </h3>
-        <h3 className="text-lg text-yellow-500 mb-1  dark:text-white">{avgRating} star</h3>
-        <h4 className="text-gray-600 mb-4 font-semibold  dark:text-white ">{sla.slaString} </h4>
+        <h3 className="text-lg text-yellow-500 mb-1  dark:text-white">
+          {avgRating} star
+        </h3>
+        <h4 className="text-gray-600 mb-4 font-semibold  dark:text-white ">
+          {sla.slaString}{" "}
+        </h4>
         <h3 className="text-2xl font-semibold mb-4">Menu</h3>
-
-       
 
         <div className="mt-3  mb-6 space-x-4">
           <button
@@ -64,13 +73,20 @@ console.log("this.is cards",cards)
           </button>
         </div>
       </div>
-
-      <CardsList cards ={cards} foodList={foodList}/>
+      {/* category accordian */}
+      {itemCategories.map((category) => (
+        <RestaurantCategory data={category?.card?.card} foodList={foodList} />
+      ))}
     </div>
   );
 };
 
 export default RestaurantMenu;
+
+
+
+
+
 
 //for unique food list
 // const uniqueFoodList = newFilterFoodList.filter(
