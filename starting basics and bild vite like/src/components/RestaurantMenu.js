@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import useFilteredFood from "../utils/useFilteredFood";
 import useAllFoodItems from "../utils/useAllFoodItems";
 
-import MenuCardList from "./RestaurantCategory";
 import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
@@ -29,17 +27,10 @@ const RestaurantMenu = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
 
-  console.log("my categories are ", itemCategories);
-
-  // const { deliveryTime } = resData?.card?.card?.info?.sla;
-
-  console.log("this is resmenu", resMenu);
-  console.log("this.is cards", cards);
-
   return (
     <div className="container m-6 ">
       {/* {console.log("start of html")} */}
-      <div className=" flex flex-col place-items-center justify-center border pl-5 shadow-md mx-48 ">
+      <div className=" flex flex-col place-items-center justify-center border pl-5 shadow-md w-6/12 m-auto mb-16">
         <h1 className="text-2xl font-bold mb-4">{name}</h1>
         <h3 className="text-xl font-semibold text-gray-700 mb-2  dark:text-white">
           <p>{cuisines.join(",")}</p>
@@ -75,18 +66,13 @@ const RestaurantMenu = () => {
       </div>
       {/* category accordian */}
       {itemCategories.map((category) => (
-        <RestaurantCategory data={category?.card?.card} foodList={foodList} />
+        <RestaurantCategory key={category.card.card.title} data={category?.card?.card} foodList={foodList} />
       ))}
     </div>
   );
 };
 
 export default RestaurantMenu;
-
-
-
-
-
 
 //for unique food list
 // const uniqueFoodList = newFilterFoodList.filter(

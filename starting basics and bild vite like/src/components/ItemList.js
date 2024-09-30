@@ -1,14 +1,11 @@
 import { CDN_URL } from "../utils/constants";
 
-const ItemList = ({ items ,showItems}) => {
-
-
-
-  console.log("items are ", items);
+const ItemList = ({ items }) => {
+  
   return (
     <div>
       <ul>
-        {showItems && items.map((item) => (
+        {items.map((item) => (
           <li 
             key={item.card.info.id}
             className="p-2 m-2 border-gray-400 border-b-2 flex justify-between last:border-none"
