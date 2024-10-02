@@ -33,7 +33,7 @@ const AppLayout = () => {
   };
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, set }}>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
       <div
         className={`min-h-screen ${
           dark ? "bg-gray-900 text-white " : "bg-white-100"
