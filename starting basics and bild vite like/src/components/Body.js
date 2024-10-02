@@ -1,8 +1,9 @@
 import RestaurantCard, { PromotedRestaurantCard } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useInternetStatus from "../utils/useInternetStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [filteredResList, setFilteredResList] = useState([]);
@@ -10,9 +11,11 @@ const Body = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const [text, setText] = useState("");
 
-  const RestaurantPromoted =PromotedRestaurantCard(RestaurantCard);
+  const RestaurantPromoted = PromotedRestaurantCard(RestaurantCard);
 
   const onlineStatus = useInternetStatus();
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   const filterTopRes = () => {
     if (isFiltered) {
@@ -74,6 +77,25 @@ const Body = () => {
             {isFiltered ? "Show All Restaurants" : "Top Rated "}
           </button>
         </div>
+
+
+
+
+
+        {/* username change  */}
+        <div>
+          <label>UserName : </label>
+          <input
+            className="border border-gray-600 p-1"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
+
+
+
+
+
         <div className="space-x-4  ">
           <input
             className="  border border-gray-300 p-1 rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500"

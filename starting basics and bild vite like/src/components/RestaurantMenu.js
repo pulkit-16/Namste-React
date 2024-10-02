@@ -5,6 +5,7 @@ import useFilteredFood from "../utils/useFilteredFood";
 import useAllFoodItems from "../utils/useAllFoodItems";
 
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -12,8 +13,10 @@ const RestaurantMenu = () => {
   const allItems = useAllFoodItems(resMenu);
   const { foodList, filterVegItems, filterNonVegItems, showAllItems } =
     useFilteredFood(allItems);
+  const[showIndex , setShowIndex] = useState(null);
+  
 
-  console.log("render compo");
+  // console.log("render compo");
 
   if (resMenu == null) return <Shimmer />;
 
@@ -65,8 +68,16 @@ const RestaurantMenu = () => {
         </div>
       </div>
       {/* category accordian */}
-      {itemCategories.map((category) => (
-        <RestaurantCategory key={category.card.card.title} data={category?.card?.card} foodList={foodList} />
+      {itemCategories.map((category,index) => (
+
+        //Controlled component
+        <RestaurantCategory
+          key={category.card.card.title}
+          data={category?.card?.card}
+          foodList={foodList}
+          showItems={index == showIndex ? true: false}
+          setShowIndex ={()=>setShowIndex(prevIndex => (prevIndex === index ? null : index))}  //gpt
+        />
       ))}
     </div>
   );

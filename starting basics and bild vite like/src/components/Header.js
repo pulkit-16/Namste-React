@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useInternetStatus from "../utils/useInternetStatus";
 import { IoSunny, IoMoon } from "react-icons/io5";
+import UserContext from "../utils/UserContext";
 
 const Header = ({ dark, darkModeHandler }) => {
   const [isLogin, setIsLogin] = useState(false);
   const onlineStatus = useInternetStatus();
+
+  const{loggedInUser} = useContext(UserContext);
 
   return (
     <header className="bg-slate-50  dark:bg-gray-900  dark:text-white shadow-md  ">
@@ -67,6 +70,9 @@ const Header = ({ dark, darkModeHandler }) => {
                 >
                   {isLogin ? "Logout" : "Login"}
                 </button>
+              </li>
+              <li className="font-bold">
+                {loggedInUser}
               </li>
               <li>
                 <button onClick={darkModeHandler} className="p-2">
